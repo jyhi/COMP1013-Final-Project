@@ -21,3 +21,20 @@ In which:
 - `<part>` should be file name(s), folder name(s), etc.
 - `<description>` should be a brief description on what you do in the commit, (generally) no more than 60 characters.
   - Starting with a verb (add, change, edit, remove, etc) is preferred.
+
+
+
+## Setup project in Visual Studio
+
+1. Create an **empty** **Command Line Program** project in Visual Studio
+2. Right click your solution in Solution Explorer and choose **"Open Folder in File Explorer"**
+3. Right click your mouse in File Explorer and choose **"Git Bash"**, then type in 
+
+```shell
+$ git init
+$ git remote add origin https://github.com/lmy441900/COMP1013-Final-Project
+$ git pull origin master
+```
+
+4. Then go back to Visual Studio and right click **Head Files** in Solution Explorer and then **Add -> Existing Items** and add all the **.hpp** files in **src** folder. Then right click Source Files in Solution Explorer and then  **Add -> Existing Items** and add all the **.cpp** files in **src** folder.
+5. You can start to code and run the program, and every time you want to push to GitHub or pull from GitHub, follow step 2 and  3.
