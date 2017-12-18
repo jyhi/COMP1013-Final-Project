@@ -1,5 +1,9 @@
 #Folders
 Debug/
+
 #Visual Studio Files
 *.vcxproj
 *.vcxproj.*
+
+#Files in macOS
+.DS_Store
