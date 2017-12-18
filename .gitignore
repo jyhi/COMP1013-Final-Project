@@ -1,0 +1,5 @@
+#Folders
+Debug/
+#Visual Studio Files
+*.vcxproj
+*.vcxproj.*
