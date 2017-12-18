@@ -19,5 +19,5 @@ Write commit messages in the form of:
 In which:
 
 - `<part>` should be file name(s), folder name(s), etc.
-- `<description>` should be a brief description on what you do in the commit, (generally) no more than 60 words.
+- `<description>` should be a brief description on what you do in the commit, (generally) no more than 60 characters.
   - Starting with a verb (add, change, edit, remove, etc) is preferred.
