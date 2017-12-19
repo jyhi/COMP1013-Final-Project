@@ -1,12 +1,14 @@
-gradeSystem: grade.o main.o inquire.o sort.o
-	gcc grade.o main.o inquire.o sort.o -o gradeSystem
-grade.o: grade.cpp
-	gcc -c grade.cpp
-main.o: main.cpp
-	gcc -c main.cpp
-sort.o: sort.cpp
-	gcc -c sort.cpp
-inquire.o: inquire.cpp
-	gcc -c inquire.cpp
+OBJS = grade.o inquire.o sort.o main.o
+
+all: grading${SUFFIX}
+
+grading${SUFFIX}: ${OBJS}
+	echo ${OS}
+	${LD} ${LDFLAGS} -o $@ $^
+
 clean:
-	rm -r *.o
+	${RM} ${RMFLAGS} *.o
+	${RM} ${RMFLAGS} grading.a
+
+%.o: %.cpp
+	${CC} ${CPPFLAGS} ${CFLAGS} -c -o $@ $^
