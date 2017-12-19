@@ -7,3 +7,11 @@ Debug/
 
 #Files in macOS
 .DS_Store
+
+#Files in make process
+*.o
+gradeSystem
+
+#Files while running program
+sort.txt
+marks.txt
