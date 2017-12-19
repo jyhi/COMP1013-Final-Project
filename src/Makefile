@@ -3,7 +3,6 @@ OBJS = grade.o inquire.o sort.o main.o
 all: grading${SUFFIX}
 
 grading${SUFFIX}: ${OBJS}
-	echo ${OS}
 	${LD} ${LDFLAGS} -o $@ $^
 
 clean:
