@@ -4,6 +4,7 @@ Debug/
 #Visual Studio Files
 *.vcxproj
 *.vcxproj.*
+*.exe
 
 #Files in macOS
 .DS_Store
