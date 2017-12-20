@@ -9,5 +9,7 @@ clean:
 	${RM} ${RMFLAGS} *.o
 	${RM} ${RMFLAGS} ${EXENAME}${SUFFIX}
 
+main.o: grade.hpp inquire.hpp sort.hpp
+
 %.o: %.cpp
-	${CC} ${CPPFLAGS} ${CFLAGS} -c -o $@ $^
+	${CC} ${CPPFLAGS} ${CFLAGS} -c -o $@ $<
