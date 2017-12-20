@@ -7,7 +7,6 @@ ${EXENAME}${SUFFIX}: ${OBJS}
 
 clean:
 	${RM} ${RMFLAGS} *.o
-	${RM} ${RMFLAGS} ${EXENAME}.a
 	${RM} ${RMFLAGS} ${EXENAME}${SUFFIX}
 
 %.o: %.cpp
