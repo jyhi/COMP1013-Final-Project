@@ -13,6 +13,9 @@
 #include "sort.hpp"
 #include "utils.hpp"
 
+/**
+ * Buffer sizes limited.
+ */
 #define BUFSIZE 512
 
 /**
@@ -26,6 +29,12 @@
 #define MAIN_MENU_SORT    3 //< User chooses to sort.
 #define MAIN_MENU_QUIT    4 //< User chooses to quit.
 
+/**
+ * Display the main menu, and ask for user input as choice of action.
+ *
+ * @return User choice, defined in constants.
+ * @see MAIN_MENU_GRADE, MAIN_MENU_INQUIRE, MAIN_MENU_SORT, MAIN_MENU_QUIT
+ */
 static int main_menu (void) {
   static const char *main_menu_text =
     "\n"
