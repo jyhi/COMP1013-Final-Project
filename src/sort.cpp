@@ -5,3 +5,7 @@
  *
  * This file contains functions related to the Sort option.
  */
+
+extern void sort (void) {
+  // Unimplemented
+}

@@ -5,3 +5,7 @@
  *
  * This file contains functions related to the Grade option.
  */
+
+extern void grade (void) {
+  // Unimplemented
+}

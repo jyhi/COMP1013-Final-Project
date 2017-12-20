@@ -9,6 +9,6 @@
 #ifndef _SORT_HPP
 #define _SORT_HPP
 
-
+extern void sort (void);
 
 #endif /* end of include guard: _SORT_HPP */

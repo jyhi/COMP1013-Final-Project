@@ -9,6 +9,6 @@
 #ifndef _INQUIRE_HPP
 #define _INQUIRE_HPP
 
-
+extern void inquire (void);
 
 #endif /* end of include guard: _INQUIRE_HPP */

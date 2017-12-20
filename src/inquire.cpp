@@ -5,3 +5,7 @@
  *
  * This file contains functions related to the Inquire option.
  */
+
+extern void inquire (void) {
+  // Unimplemented
+}
