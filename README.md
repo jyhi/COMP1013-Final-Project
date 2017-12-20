@@ -6,7 +6,7 @@ See the project guideline for details.
 
 ## Building
 
-On Linux or Windows with Cygwin / MSYS:
+On Linux or Windows with Cygwin / MSYS / WSL:
 
 ```bash
 make clean     # Clean the repository
