@@ -6,6 +6,7 @@ CP = cp
 RM = rm
 RMFLAGS = -f
 
+EXENAME = grading
 # SUFFIX = .exe
 
 ifdef DEBUG
@@ -24,10 +25,9 @@ export
 
 .PHONY: all clean
 
-all: grading${SUFFIX}
-	${CP} $^ .
+all: ${EXENAME}${SUFFIX}
 
-grading${SUFFIX}:
+${EXENAME}${SUFFIX}:
 	${MAKE} -C src
 
 clean:

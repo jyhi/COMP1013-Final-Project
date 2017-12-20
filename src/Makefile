@@ -1,13 +1,14 @@
 OBJS = grade.o inquire.o sort.o main.o
 
-all: grading${SUFFIX}
+all: ${EXENAME}${SUFFIX}
 
-grading${SUFFIX}: ${OBJS}
+${EXENAME}${SUFFIX}: ${OBJS}
 	${LD} ${LDFLAGS} -o $@ $^
 
 clean:
 	${RM} ${RMFLAGS} *.o
-	${RM} ${RMFLAGS} grading.a
+	${RM} ${RMFLAGS} ${EXENAME}.a
+	${RM} ${RMFLAGS} ${EXENAME}${SUFFIX}
 
 %.o: %.cpp
 	${CC} ${CPPFLAGS} ${CFLAGS} -c -o $@ $^
