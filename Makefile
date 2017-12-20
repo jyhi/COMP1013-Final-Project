@@ -25,9 +25,7 @@ export
 
 .PHONY: all clean
 
-all: ${EXENAME}${SUFFIX}
-
-${EXENAME}${SUFFIX}:
+all:
 	${MAKE} -C src
 
 clean:
