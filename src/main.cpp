@@ -15,10 +15,16 @@
 
 #define BUFSIZE 512
 
-#define MAIN_MENU_GRADE   0
-#define MAIN_MENU_INQUIRE 1
-#define MAIN_MENU_SORT    2
-#define MAIN_MENU_QUIT    3
+/**
+ * Definitions for main_menu's return value.
+ *
+ * These values are also used for menu display.
+ * @see STR
+ */
+#define MAIN_MENU_GRADE   1 //< User chooses to grade.
+#define MAIN_MENU_INQUIRE 2 //< User chooses to inquire.
+#define MAIN_MENU_SORT    3 //< User chooses to sort.
+#define MAIN_MENU_QUIT    4 //< User chooses to quit.
 
 static int main_menu (void) {
   static const char *main_menu_text =
