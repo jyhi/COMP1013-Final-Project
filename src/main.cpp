@@ -11,6 +11,7 @@
 #include "grade.hpp"
 #include "inquire.hpp"
 #include "sort.hpp"
+#include "utils.hpp"
 
 #define BUFSIZE 512
 
@@ -26,10 +27,10 @@ static int main_menu (void) {
     "\n"
     "Choose an option to start:\n"
     "\n"
-    "1. Grade\n"
-    "2. Inquire\n"
-    "3. Sort\n"
-    "4. Quit\n"
+    STR(MAIN_MENU_GRADE)   ". Grade\n"
+    STR(MAIN_MENU_INQUIRE) ". Inquire\n"
+    STR(MAIN_MENU_SORT)    ". Sort\n"
+    STR(MAIN_MENU_QUIT)    ". Quit\n"
     "\n"
     "Your option: ";           // Menu text to be displayed to user
   char linebuf[BUFSIZE] = {0}; // Buffer to receive user input
