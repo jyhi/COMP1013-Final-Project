@@ -5,7 +5,7 @@
  *
  * This file contains functions related to the Inquire option.
  */
-
+#include "node.hpp"
 extern void inquire (void) {
   // Unimplemented
 }

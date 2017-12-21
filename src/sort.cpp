@@ -5,7 +5,7 @@
  *
  * This file contains functions related to the Sort option.
  */
-
+#include "node.hpp"
 extern void sort (void) {
   // Unimplemented
 }

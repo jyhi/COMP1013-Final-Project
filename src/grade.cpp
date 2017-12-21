@@ -5,7 +5,7 @@
  *
  * This file contains functions related to the Grade option.
  */
-
+#include "node.hpp"
 extern void grade (void) {
   // Unimplemented
 }

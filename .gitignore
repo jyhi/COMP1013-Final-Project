@@ -12,6 +12,8 @@ Debug/
 #Files in make process
 *.o
 gradeSystem
+*.out
+*.gch
 
 #Files while running program
 sorted.txt
