@@ -29,6 +29,7 @@ extern bool hw_status[];
 2. Use "r" mode to open the file, otherwise the file would be wiped!!!
 3. Use this function if and only if the file pointer is not NULL.
 4. The reference of function look like this: read_from_students(fp, &head);
+5. The file pointer has closed in this function, you don't need to close it by yourself.
 */
 extern void read_from_students(FILE *fp, Node **head);
 
@@ -38,6 +39,7 @@ extern void read_from_students(FILE *fp, Node **head);
 2. Use "r" mode to open the file, otherwise the file would be wiped!!!
 3. Use this function if and only if the file pointer is not NULL.
 4. The reference of function look like this: read_from_marks(fp, &head, hw_status);
+5. The file pointer has closed in this function, you don't need to close it by yourself.
 */
 extern void read_from_marks(FILE *fp, Node **head, bool status[]);
 
