@@ -14,7 +14,7 @@ static int get_hw_index(char str[]){
 }
 
 
-void read_from_students(FILE *fp, Node **head){
+extern void read_from_students(FILE *fp, Node **head){
     char linebuf[BUFSIZE];
     Node *present, *next;
     fgets(linebuf, BUFSIZE, fp);//Clear the first line;
@@ -33,13 +33,13 @@ void read_from_students(FILE *fp, Node **head){
     fclose(fp);
 }
 
-void read_from_marks(FILE *fp, Node **head, bool hw_status[]){
+extern void read_from_marks(FILE *fp, Node **head, bool status[]){
     char linebuf[BUFSIZE];
     Node *present, *next;
     fscanf(fp, "%*s%s", linebuf);
     while (true){
         fscanf(fp, "%s", linebuf);
-        hw_status[get_hw_index(linebuf) - 1] = true;
+        status[get_hw_index(linebuf) - 1] = true;
         if (fgetc(fp) == '\n')
             break;
     }
@@ -47,7 +47,7 @@ void read_from_marks(FILE *fp, Node **head, bool hw_status[]){
     fscanf(fp, "%s %d", present->name, &present->id);
     *head = present;
     for (int i = 0; i < 5; i++){
-        if (hw_status[i]){
+        if (status[i]){
             fscanf(fp, "%lf", &present->assignments[i]);
         }
     }    
@@ -56,7 +56,7 @@ void read_from_marks(FILE *fp, Node **head, bool hw_status[]){
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)
             break;
         for (int i = 0; i < 5; i++){
-            if (hw_status[i]){
+            if (status[i]){
                 fscanf(fp, "%lf", &next->assignments[i]);
             }
         }

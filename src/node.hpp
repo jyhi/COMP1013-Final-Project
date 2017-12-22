@@ -18,7 +18,11 @@ typedef struct node {
     struct node *next;
 } Node;
 
-bool hw_status[5] = {false};//Check if this homework exist in marks.txt
+/*
+Check if this homework exist in marks.txt
+Initialize it in the format of: bool hw_status[5] = {false}; in function grade inquire and sort
+*/
+extern bool hw_status[];
 
 /*
 1. Read information from students.txt
@@ -26,7 +30,7 @@ bool hw_status[5] = {false};//Check if this homework exist in marks.txt
 3. Use this function if and only if the file pointer is not NULL.
 4. The reference of function look like this: read_from_students(fp, &head);
 */
-void read_from_students(FILE *fp, Node **head);
+extern void read_from_students(FILE *fp, Node **head);
 
 
 /*
@@ -35,6 +39,6 @@ void read_from_students(FILE *fp, Node **head);
 3. Use this function if and only if the file pointer is not NULL.
 4. The reference of function look like this: read_from_marks(fp, &head, hw_status);
 */
-void read_from_marks(FILE *fp, Node **head, bool hw_status[]);
+extern void read_from_marks(FILE *fp, Node **head, bool status[]);
 
 #endif /* end of include guard: _NODE_HPP */
