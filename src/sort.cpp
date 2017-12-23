@@ -94,10 +94,6 @@ extern void sort (void) {
   // Unimplemented
   bool hw_status[5] = {false};
   FILE *fpm = fopen("marks.txt", "r");
-  if(fpm == NULL){
-    puts("File not exist.");
-    exit(0);
-  }
   Node *head, *pnode;
   read_from_marks(fpm, &head, hw_status);
   //Get total mark of each student

@@ -17,6 +17,10 @@ static int get_hw_index(char str[]){
 extern void read_from_students(FILE *fp, Node **head){
     char linebuf[BUFSIZE];
     Node *present, *next;
+    if(fp == NULL){
+        puts("File not exist.");
+        exit(0);
+    }
     if (fgets(linebuf, BUFSIZE, fp) == NULL){
         puts("students.txt is empty.");
         exit(0);
@@ -42,6 +46,10 @@ extern void read_from_students(FILE *fp, Node **head){
 extern void read_from_marks(FILE *fp, Node **head, bool status[]){
     char linebuf[BUFSIZE];
     Node *present, *next;
+    if(fp == NULL){
+        puts("File not exist.");
+        exit(0);
+    }
     if (fscanf(fp, "%*s%s", linebuf) == EOF){
         puts("marks.txt is empty");
         exit(0);
