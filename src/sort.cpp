@@ -26,7 +26,7 @@ static void get_total(Node *head, bool status[]){
 //Sort total mark using insert sort
 static Node *insert_sort(Node *head){
   Node *current;//Record the smallest number currently
-  Node *present;//Record the node current->next will insert
+  Node *present;//Record the node that node insert will insert after
   Node *insert;//Record the node which will be insertede
   current = head;//Store the origin head of linked list
   while (current->next != NULL){
@@ -36,7 +36,7 @@ static Node *insert_sort(Node *head){
     }
     insert = current->next;
     current->next = insert->next;
-    if (insert->total > head->total){//If current->next->total is the biggest number
+    if (insert->total > head->total){//If insert->total is the biggest number
       insert->next = head;
       head = insert;
       continue;
@@ -56,10 +56,10 @@ static Node *insert_sort(Node *head){
 
 //Print result into file
 static void file_print_result(Node *result){
-  FILE *fpsw = fopen("sorted.txt", "w+");
-  Node *pnode = result;
-  fprintf(fpsw, "%-10s%-6s%s\n", "Name", "ID", "Total");
-  while (pnode != NULL){
+  FILE *fpsw = fopen("sorted.txt", "w+");//Open sorted.txt to write results in
+  Node *pnode = result;//Record current node
+  fprintf(fpsw, "%-10s%-6s%s\n", "Name", "ID", "Total");//Write the first line
+  while (pnode != NULL){//Write data into sorted.txt
     fprintf(fpsw, "%-10s%-6d%.2f\n", pnode->name, pnode->id, pnode->total);
     pnode = pnode->next;
   }
@@ -69,15 +69,15 @@ static void file_print_result(Node *result){
 //Read from file and return the head of linked list
 static Node *read_from_sorted(Node *new_node){
   FILE *fpsr = fopen("sorted.txt", "r");
-  Node *pnode, *next;
+  Node *pnode, *next;//pnode record current node, next get data from file
   new_node = (Node *)malloc(sizeof(Node));
   char linebuf[BUFSIZE];
-  if (fgets(linebuf, BUFSIZE, fpsr) == NULL)
+  if (fgets(linebuf, BUFSIZE, fpsr) == NULL)//Ignore the first line
     return NULL;
   if (fscanf(fpsr, "%s %d %lf", new_node->name, &new_node->id, &new_node->total) == EOF)
     return NULL;
   pnode = new_node;
-  while(true){
+  while(true){//Scan data into a linked list
     next = (Node *)malloc(sizeof(Node));
     if (fscanf(fpsr, "%s %d %lf", next->name, &next->id, &next->total) == EOF){
       free(next);
@@ -91,14 +91,14 @@ static Node *read_from_sorted(Node *new_node){
 }
 
 extern void sort (void) {
-  // Unimplemented
   bool hw_status[5] = {false};
   FILE *fpm = fopen("marks.txt", "r");
   Node *head, *pnode;
   read_from_marks(fpm, &head, hw_status);
   //Get total mark of each student
   get_total(head, hw_status);
-  head = insert_sort(head);//Sort using insert sort
+  //Sort using insert sort
+  head = insert_sort(head);
   //Print into file
   file_print_result(head);
   //Read from file
