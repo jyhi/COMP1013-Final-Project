@@ -103,7 +103,7 @@ static Node *read_from_sorted(Node *new_node){
   return new_node;
 }
 
-extern void sort (void) {
+int main (void) {
   // Unimplemented
   bool hw_status[5] = {false};
   FILE *fpm = fopen("marks.txt", "r");
@@ -114,11 +114,7 @@ extern void sort (void) {
   Node *head, *pnode, *result;
   read_from_marks(fpm, &head, hw_status);
   //Get total mark of each student
-  pnode = head;
-  while (pnode != NULL){
-    get_total(head, hw_status);
-    pnode = pnode->next;
-  }
+  get_total(head, hw_status);
   result = insert_sort(head, result);//Sort using insert sort
   //Print into file
   file_print_result(result);
