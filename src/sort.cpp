@@ -24,47 +24,34 @@ static void get_total(Node *head, bool status[]){
 }
 
 //Sort total mark using insert sort
-static Node *insert_sort(Node *head, Node *result){
-  result = (Node *)malloc(sizeof(Node));
-  //Initialize result
-  strcpy(result->name, head->name);
-  result->id = head->id;
-  result->total = head->total;
-  result->next = NULL;
-  //Initialize other nodes
-  Node *present = head->next;//Node search in head
-  Node *insert;//Insert value into linked list "result"
-  Node *pnode;//Record the current node in linked list "result"
-  while (present != NULL){
-    pnode = result;
-    //Intialize variable insert
-    insert = (Node *)malloc(sizeof(Node));
-    strcpy(insert->name, present->name);
-    insert->id = present->id;
-    insert->total = present->total;
-    //Judge where to insert in linked list "result"
-    if (insert->total > result->total){//If the insert total is bigger than the head of linked list "result"
-      insert->next = result;
-      result = insert;
-      present = present->next;
+static Node *insert_sort(Node *head){
+  Node *current;//Record the smallest number currently
+  Node *present;//Record the node current->next will insert
+  Node *insert;//Record the node which will be insertede
+  current = head;//Store the origin head of linked list
+  while (current->next != NULL){
+    if (current->total >= current->next->total){//If current->total is not the smallest 
+      current = current->next;
       continue;
     }
-    while (pnode != NULL){
-      if (pnode->next == NULL){//If pnode is the last element of linked list "result"
-        pnode->next = insert;
-        insert->next = NULL;
-        break;
-      }
-      if (insert->total > pnode->next->total){//If pnode is not the last element of linked list "result"
-        insert->next = pnode->next;
-        pnode->next = insert;
-        break;
-      }
-      pnode = pnode->next;
+    insert = current->next;
+    current->next = insert->next;
+    if (insert->total > head->total){//If current->next->total is the biggest number
+      insert->next = head;
+      head = insert;
+      continue;
     }
-    present = present->next;
+    present = head;
+    while (present->next != NULL){//Find the proper position to insert
+      if (insert->total > present->next->total){
+        insert->next = present->next;
+        present->next = insert;
+        break;
+      }
+      present = present->next;
+    }
   }
-  return result;
+  return head;
 }
 
 //Print result into file
@@ -103,7 +90,7 @@ static Node *read_from_sorted(Node *new_node){
   return new_node;
 }
 
-int main (void) {
+extern void sort (void) {
   // Unimplemented
   bool hw_status[5] = {false};
   FILE *fpm = fopen("marks.txt", "r");
@@ -111,13 +98,13 @@ int main (void) {
     puts("File not exist.");
     exit(0);
   }
-  Node *head, *pnode, *result;
+  Node *head, *pnode;
   read_from_marks(fpm, &head, hw_status);
   //Get total mark of each student
   get_total(head, hw_status);
-  result = insert_sort(head, result);//Sort using insert sort
+  head = insert_sort(head);//Sort using insert sort
   //Print into file
-  file_print_result(result);
+  file_print_result(head);
   //Read from file
   Node *new_node = read_from_sorted(new_node);
   //Print the result out
