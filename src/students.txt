@@ -1,4 +1,0 @@
-Name    ID
-Andrew  1234
-Amy     1235
-Bill    1236

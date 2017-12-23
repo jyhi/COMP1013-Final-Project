@@ -33,29 +33,29 @@ static Node *insert_sort(Node *head, Node *result){
   result->next = NULL;
   //Initialize other nodes
   Node *present = head->next;//Node search in head
-  Node *insert;//Insert value into result
-  Node *pnode;//Record the current node in result and the next node in result
+  Node *insert;//Insert value into linked list "result"
+  Node *pnode;//Record the current node in linked list "result"
   while (present != NULL){
     pnode = result;
-    //Intialize insert
+    //Intialize variable insert
     insert = (Node *)malloc(sizeof(Node));
     strcpy(insert->name, present->name);
     insert->id = present->id;
     insert->total = present->total;
-    //When we need to insert it before result
-    if (insert->total > result->total){//If the insert total is bigger than the head of result
+    //Judge where to insert in linked list "result"
+    if (insert->total > result->total){//If the insert total is bigger than the head of linked list "result"
       insert->next = result;
       result = insert;
       present = present->next;
       continue;
     }
     while (pnode != NULL){
-      if (pnode->next == NULL){//If pnode is the last element
+      if (pnode->next == NULL){//If pnode is the last element of linked list "result"
         pnode->next = insert;
         insert->next = NULL;
         break;
       }
-      if (insert->total > pnode->next->total){//If pnode is not the last element
+      if (insert->total > pnode->next->total){//If pnode is not the last element of linked list "result"
         insert->next = pnode->next;
         pnode->next = insert;
         break;
@@ -85,8 +85,10 @@ static Node *read_from_sorted(Node *new_node){
   Node *pnode, *next;
   new_node = (Node *)malloc(sizeof(Node));
   char linebuf[BUFSIZE];
-  fgets(linebuf, BUFSIZE, fpsr);
-  fscanf(fpsr, "%s %d %lf", new_node->name, &new_node->id, &new_node->total);
+  if (fgets(linebuf, BUFSIZE, fpsr) == NULL)
+    return NULL;
+  if (fscanf(fpsr, "%s %d %lf", new_node->name, &new_node->id, &new_node->total) == EOF)
+    return NULL;
   pnode = new_node;
   while(true){
     next = (Node *)malloc(sizeof(Node));

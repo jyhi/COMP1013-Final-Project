@@ -11,10 +11,11 @@ Debug/
 
 #Files in make process
 *.o
-gradeSystem
+grading
 *.out
 *.gch
 
 #Files while running program
 sorted.txt
 marks.txt
+students.txt

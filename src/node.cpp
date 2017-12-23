@@ -17,9 +17,15 @@ static int get_hw_index(char str[]){
 extern void read_from_students(FILE *fp, Node **head){
     char linebuf[BUFSIZE];
     Node *present, *next;
-    fgets(linebuf, BUFSIZE, fp);//Clear the first line;
+    if (fgets(linebuf, BUFSIZE, fp) == NULL){
+        puts("students.txt is empty.");
+        exit(0);
+    }
     present = (Node *)malloc(sizeof(Node));
-    fscanf(fp, "%s %d", present->name, &present->id);
+    if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
+        puts("No data in students.txt");
+        exit(0);
+    }
     *head = present;
     while (true){
         next = (Node *)malloc(sizeof(Node));
@@ -36,28 +42,43 @@ extern void read_from_students(FILE *fp, Node **head){
 extern void read_from_marks(FILE *fp, Node **head, bool status[]){
     char linebuf[BUFSIZE];
     Node *present, *next;
-    fscanf(fp, "%*s%s", linebuf);
+    if (fscanf(fp, "%*s%s", linebuf) == EOF){
+        puts("marks.txt is empty");
+        exit(0);
+    }
     while (true){
-        fscanf(fp, "%s", linebuf);
+        if (fscanf(fp, "%s", linebuf) == EOF)
+            break;
         status[get_hw_index(linebuf) - 1] = true;
         if (fgetc(fp) == '\n')
             break;
     }
     present = (Node *)malloc(sizeof(Node));
-    fscanf(fp, "%s %d", present->name, &present->id);
+    if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
+        puts("No data in students.txt");
+        exit(0);
+    }
     *head = present;
+    //Scan the head of linked list
     for (int i = 0; i < 5; i++){
         if (status[i]){
-            fscanf(fp, "%lf", &present->assignments[i]);
+            if (fscanf(fp, "%lf", &present->assignments[i]) == EOF){
+                 puts("Something wrong with marks.txt");
+                 exit(0);
+            }
         }
     }    
+    //Scan other nodes of linked
     while (true){
         next = (Node *)malloc(sizeof(Node));
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)
             break;
         for (int i = 0; i < 5; i++){
             if (status[i]){
-                fscanf(fp, "%lf", &next->assignments[i]);
+                if (fscanf(fp, "%lf", &next->assignments[i]) == EOF){
+                    puts("Something wrong with marks.txt");
+                    exit(0);
+                }
             }
         }
         present->next = next;
