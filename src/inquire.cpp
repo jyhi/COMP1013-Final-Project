@@ -4,18 +4,28 @@
 
 /**
  * @file inquire.cpp
- * @version 1.0
+ * @version 1.5
  * @author Laurence
  *
  * This file contains functions related to the Inquire option.
  */
 
+typedef struct student {
+    char name[20];
+    int id;
+    double assignments[5];
+} Student;
+
+
 void inquire_student_display () {
 
 }
 
-void inquire_read_student_marks () {
-    char szTest[500] = {0};
+void inquire_by_index () {
+    Student inquire_students_array[20];
+
+    char szTest[100] = {0};
+    int read_count = 0, assignment_count = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
@@ -23,24 +33,46 @@ void inquire_read_student_marks () {
     while(!feof(fpsm))
     {
         memset(szTest, 0, sizeof(szTest));
-        fgets(szTest, sizeof(szTest) - 1, fpsm); // 包含了换行符
-        printf("%s", szTest);
+        if (read_count == 0) {
+            fgets(szTest, sizeof(szTest) - 1, fpsm);
+            puts("%s", szTest);
+            assignment_count = szTest[strlen(szTest) - 1];
+        } else {
+            fscanf(fpsm, "%s", inquire_students_array[read_count - 1].name);
+            for (int i = 0; i < assignment_count; i++) {
+                fscanf(fpsm, "%lf", &inquire_students_array[read_count - 1].assignments[i]);
+            }
+        }
+        read_count++;
     }
-    printf("\n");
-    memset(szTest, 0, sizeof(szTest));
-    fgets(szTest, sizeof(szTest) - 1, fpsm);
-    printf("%s", szTest);
-    printf("\n");
-}
 
-void inquire_by_index () {
-    inquire_read_student_marks ();
 
     inquire_student_display ();
 }
 
 void inquire_by_student_id () {
-    inquire_read_student_marks ();
+    Student inquire_students_array[20];
+
+    char szTest[500] = {0};
+    int read_count = 0, assignment_count = 0;
+    bool hw_status[5] = {false};
+    Node *head, *pnode, *result;
+    FILE *fpsm = NULL;
+    read_from_marks(fpsm, &head, hw_status);
+    while(!feof(fpsm))
+    {
+        memset(szTest, 0, sizeof(szTest));
+        if (read_count == 0) {
+            fgets(szTest, sizeof(szTest) - 1, fpsm);
+            assignment_count = szTest[strlen(szTest) - 1];
+        } else {
+            fscanf(fpsm, "%s", inquire_students_array[read_count - 1].name);
+            for (int i = 0; i < assignment_count; i++) {
+                fscanf(fpsm, "%lf", &inquire_students_array[read_count - 1].assignments[i]);
+            }
+        }
+        read_count++;
+    }
 
     inquire_student_display ();
 }
