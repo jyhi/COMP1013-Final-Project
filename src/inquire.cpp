@@ -10,12 +10,23 @@
  * This file contains functions related to the Inquire option.
  */
 
+typedef struct student {
+    char name[20];
+    int id;
+    double assignments[5];
+    double total;
+    struct node *next;
+} Student;
+
+
 void inquire_student_display () {
 
 }
 
 void inquire_read_student_marks () {
     char szTest[500] = {0};
+    Student inquire_students_array[20];
+    int count = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
@@ -23,7 +34,9 @@ void inquire_read_student_marks () {
     while(!feof(fpsm))
     {
         memset(szTest, 0, sizeof(szTest));
-        fgets(szTest, sizeof(szTest) - 1, fpsm); // 包含了换行符
+        fgets(szTest, sizeof(szTest) - 1, fpsm);
+        fscanf(fpsm, "%s", inquire_students_array[count].name);
+        fscanf(fpsm, "%d")
         printf("%s", szTest);
     }
     printf("\n");
