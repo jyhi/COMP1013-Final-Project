@@ -18,7 +18,7 @@ else
 CFLAGS   = -O2 -fstack-protector-strong --param=ssp-buffer-size=4 -fPIE -Wall -Wextra -pedantic
 CPPFLAGS = -D_FORTIFY_SOURCE=2
 ARFLAGS  = rcs
-LDFLAGS  = -Wl,-O1,--sort-common,--as-needed -Wl,-z,relro,-z,now -pie
+LDFLAGS  = -pie
 endif
 
 export
