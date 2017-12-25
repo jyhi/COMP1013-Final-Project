@@ -70,7 +70,6 @@ static void file_print_result(Node *result){
 static Node *read_from_sorted(Node *new_node){
   FILE *fpsr = fopen("sorted.txt", "r");
   Node *pnode, *next;//pnode record current node, next get data from file
-  new_node = (Node *)malloc(sizeof(Node));
   char linebuf[BUFSIZE];
   if (fgets(linebuf, BUFSIZE, fpsr) == NULL)//Ignore the first line
     return NULL;
@@ -102,7 +101,8 @@ extern void sort (void) {
   //Print into file
   file_print_result(head);
   //Read from file
-  Node *new_node = read_from_sorted(new_node);
+  Node *new_node = (Node *)malloc(sizeof(Node));
+  new_node = read_from_sorted(new_node);
   //Print the result out
   pnode = new_node;
   printf("%-10s%-6s%s\n", "Name", "ID", "Total");
