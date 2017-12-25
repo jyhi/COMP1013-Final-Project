@@ -14,21 +14,21 @@ static int get_hw_index(char str[]){
 }
 
 
-extern void read_from_students(FILE *fp, Node **head){
+extern int read_from_students(FILE *fp, Node **head){
     char linebuf[BUFSIZE];
     Node *present, *next;
     if(fp == NULL){
         puts("File not exist.");
-        exit(0);
+        return -1;
     }
     if (fgets(linebuf, BUFSIZE, fp) == NULL){
         puts("students.txt is empty.");
-        exit(0);
+        return -1;
     }
     present = (Node *)malloc(sizeof(Node));
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
         puts("No data in students.txt");
-        exit(0);
+        return -1;
     }
     *head = present;
     while (true){
@@ -41,18 +41,19 @@ extern void read_from_students(FILE *fp, Node **head){
     free(next);
     present->next = NULL;
     fclose(fp);
+    return 0;
 }
 
-extern void read_from_marks(FILE *fp, Node **head, bool status[]){
+extern int read_from_marks(FILE *fp, Node **head, bool status[]){
     char linebuf[BUFSIZE];
     Node *present, *next;
     if(fp == NULL){
         puts("File not exist.");
-        exit(0);
+        return -1;
     }
     if (fscanf(fp, "%*s%s", linebuf) == EOF){
         puts("marks.txt is empty");
-        exit(0);
+        return -1;
     }
     while (true){
         if (fscanf(fp, "%s", linebuf) == EOF)
@@ -64,7 +65,7 @@ extern void read_from_marks(FILE *fp, Node **head, bool status[]){
     present = (Node *)malloc(sizeof(Node));
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
         puts("No data in students.txt");
-        exit(0);
+        return -1;
     }
     *head = present;
     //Scan the head of linked list
@@ -72,7 +73,7 @@ extern void read_from_marks(FILE *fp, Node **head, bool status[]){
         if (status[i]){
             if (fscanf(fp, "%lf", &present->assignments[i]) == EOF){
                  puts("Something wrong with marks.txt");
-                 exit(0);
+                 return -1;
             }
         }
     }    
@@ -85,7 +86,7 @@ extern void read_from_marks(FILE *fp, Node **head, bool status[]){
             if (status[i]){
                 if (fscanf(fp, "%lf", &next->assignments[i]) == EOF){
                     puts("Something wrong with marks.txt");
-                    exit(0);
+                    return -1;
                 }
             }
         }
@@ -95,4 +96,5 @@ extern void read_from_marks(FILE *fp, Node **head, bool status[]){
     free(next);
     present->next = NULL;
     fclose(fp);
+    return 0;
 }
