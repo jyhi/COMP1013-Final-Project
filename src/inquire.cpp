@@ -10,71 +10,85 @@
  * This file contains functions related to the Inquire option.
  */
 
-typedef struct student {
-    char name[20];
-    int id;
-    double assignments[5];
-} Student;
-
-
-void inquire_student_display () {
-
+void inquire_student_display (Node *the_node, int assignment_number) {
+    puts("The information of the student you inquire is:");
+    printf("%s\t%d", the_node->name, the_node->id);
+    for (int k = 0; k < assignment_number; k++) {
+        printf("%.2lf\t", the_node->assignments[k]);
+    }
 }
 
+//inquire the student's information by input the index of that student in the list
 void inquire_by_index () {
-    Student inquire_students_array[20];
-
-    char szTest[100] = {0};
-    int read_count = 0, assignment_count = 0;
+    int student_index, index = 0, assignment_number = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
     read_from_marks(fpsm, &head, hw_status);
-    while(!feof(fpsm))
-    {
-        memset(szTest, 0, sizeof(szTest));
-        if (read_count == 0) {
-            fgets(szTest, sizeof(szTest) - 1, fpsm);
-            puts("%s", szTest);
-            assignment_count = szTest[strlen(szTest) - 1];
-        } else {
-            fscanf(fpsm, "%s", inquire_students_array[read_count - 1].name);
-            for (int i = 0; i < assignment_count; i++) {
-                fscanf(fpsm, "%lf", &inquire_students_array[read_count - 1].assignments[i]);
-            }
+
+    for (int i = 0; i < 5; i++){
+        if (hw_status[i]){
+            assignment_number++;
         }
-        read_count++;
+    }
+    printf("Index\tName\tID\t");
+    for (int j = 0; j < assignment_number; j++) {
+        printf("Assignment%d", j + 1 );
     }
 
+    pnode = head;
 
-    inquire_student_display ();
+    while (pnode != NULL) {
+        printf("%d\t%s\t%d", index, pnode->name, pnode->id);
+        for (int k = 0; k < assignment_number; k++) {
+            printf("%.2lf\t", pnode->assignments[k]);
+        }
+        index++;
+        pnode = pnode->next;
+    }
+
+    puts("Please input the student's index number:");
+    fflush(stdin);
+    scanf("%d", &student_index);
+
+    for (int l = 0; l <= index; l++) {
+        result = head;
+        head = head -> next;
+    }
+    inquire_student_display (result, assignment_number);
 }
 
+//inquire the student's information by input the id number
 void inquire_by_student_id () {
-    Student inquire_students_array[20];
-
-    char szTest[500] = {0};
-    int read_count = 0, assignment_count = 0;
+    int student_id, assignment_number = 0;
     bool hw_status[5] = {false};
-    Node *head, *pnode, *result;
+
+    puts("Please input the student's id number:");
+    fflush(stdin);
+    scanf("%d", &student_id);
+
+    Node *head, *pnode;
     FILE *fpsm = NULL;
     read_from_marks(fpsm, &head, hw_status);
-    while(!feof(fpsm))
-    {
-        memset(szTest, 0, sizeof(szTest));
-        if (read_count == 0) {
-            fgets(szTest, sizeof(szTest) - 1, fpsm);
-            assignment_count = szTest[strlen(szTest) - 1];
-        } else {
-            fscanf(fpsm, "%s", inquire_students_array[read_count - 1].name);
-            for (int i = 0; i < assignment_count; i++) {
-                fscanf(fpsm, "%lf", &inquire_students_array[read_count - 1].assignments[i]);
-            }
+
+    for (int i = 0; i < 5; i++){
+        if (hw_status[i]){
+            assignment_number++;
         }
-        read_count++;
     }
 
-    inquire_student_display ();
+    pnode  = head;
+
+    while (pnode != NULL) {
+        if (pnode->id == student_id) {
+            inquire_student_display (pnode, assignment_number);
+            return;
+        } else {
+            pnode = pnode->next;
+        }
+    }
+
+    puts("The input id number is not exist in the student list.");
 }
 
 extern void inquire (void) {
