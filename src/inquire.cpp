@@ -18,8 +18,11 @@ void inquire_student_display (Node *the_node, int assignment_number) {
     }
 }
 
-//inquire the student's information by input the index of that student in the list
-void inquire_by_index () {
+/**
+ * Inquire the student's information by input the index of that student in the
+ * list.
+ */
+void inquire_by_index (void) {
     int student_index, index = 0, assignment_number = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
@@ -62,7 +65,9 @@ void inquire_by_index () {
     inquire_student_display (result, assignment_number);
 }
 
-//inquire the student's information by input the id number
+/**
+ * Inquire the student's information by input the id number.
+ */
 void inquire_by_student_id () {
     int student_id, assignment_number = 0;
     bool hw_status[5] = {false};
@@ -99,7 +104,6 @@ void inquire_by_student_id () {
 }
 
 extern void inquire (void) {
-    //Unimplemented
     int inquire_menu_option;
     puts("\n===== Student Grading System =====\n");
     puts("Choose an option to start:");
@@ -108,7 +112,6 @@ extern void inquire (void) {
     puts("2. By student id");
     puts("3. Quit\n");
     printf("Your Option: ");
-    //display the menu
 
     scanf("%d", &inquire_menu_option);
     puts("");
@@ -120,7 +123,7 @@ extern void inquire (void) {
         case 2:
             inquire_by_student_id();
             break;
-        case 3:
+        case 3: // fall through
         default:
             break;
     }
