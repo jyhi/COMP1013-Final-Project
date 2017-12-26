@@ -27,7 +27,7 @@ extern int read_from_students(FILE *fp, Node **head){
     }
     present = (Node *)malloc(sizeof(Node));
     if (!present) {
-      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      fprintf (stderr, "** Fatal error: memory allocation failed at %s:%d. Abort.\n", __FILE__, __LINE__);
       abort ();
     }
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
@@ -38,7 +38,7 @@ extern int read_from_students(FILE *fp, Node **head){
     while (true){
         next = (Node *)malloc(sizeof(Node));
         if (!next) {
-          puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+          fprintf (stderr, "** Fatal error: memory allocation failed at %s:%d. Abort.\n", __FILE__, __LINE__);
           abort ();
         }
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)
@@ -72,7 +72,7 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
     }
     present = (Node *)malloc(sizeof(Node));
     if (!present) {
-      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      fprintf (stderr, "** Fatal error: memory allocation failed at %s:%d. Abort.\n", __FILE__, __LINE__);
       abort ();
     }
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
@@ -93,7 +93,7 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
     while (true){
         next = (Node *)malloc(sizeof(Node));
         if (!next) {
-          puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+          fprintf (stderr, "** Fatal error: memory allocation failed at %s:%d. Abort.\n", __FILE__, __LINE__);
           abort ();
         }
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)

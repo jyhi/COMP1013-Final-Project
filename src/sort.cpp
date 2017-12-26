@@ -92,7 +92,7 @@ static Node *read_from_sorted(Node *new_node){
   while(true){//Scan data into a linked list
     next = (Node *)malloc(sizeof(Node));
     if (!next) {
-      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      fprintf (stderr, "** Fatal error: memory allocation failed at %s:%d. Abort.\n", __FILE__, __LINE__);
       abort ();
     }
     if (fscanf(fpsr, "%s %d %lf", next->name, &next->id, &next->total) == EOF){
