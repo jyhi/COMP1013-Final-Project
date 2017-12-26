@@ -24,13 +24,17 @@ void inquire_by_index () {
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
-    read_from_marks(fpsm, &head, hw_status);
+
+    if (read_from_marks(fpsm, &head, hw_status) == -1) {
+        return;
+    }
 
     for (int i = 0; i < 5; i++){
         if (hw_status[i]){
             assignment_number++;
         }
     }
+
     printf("Index\tName\tID\t");
     for (int j = 0; j < assignment_number; j++) {
         printf("Assignment%d", j + 1 );
@@ -69,7 +73,10 @@ void inquire_by_student_id () {
 
     Node *head, *pnode;
     FILE *fpsm = NULL;
-    read_from_marks(fpsm, &head, hw_status);
+    
+    if (read_from_marks(fpsm, &head, hw_status) == -1) {
+        return;
+    }
 
     for (int i = 0; i < 5; i++){
         if (hw_status[i]){
