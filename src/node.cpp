@@ -1,7 +1,7 @@
 /**
  * @file node.cpp
  * @version 0.1
- * @author
+ * @author Renjie Deng <dengrenjie31@gmail.com>
  *
  * This file contains functions on operations about linked list.
  */
@@ -76,7 +76,7 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
                  return -1;
             }
         }
-    }    
+    }
     //Scan other nodes of linked
     while (true){
         next = (Node *)malloc(sizeof(Node));
