@@ -78,7 +78,7 @@ static Node *read_from_sorted(Node *new_node){
   if (!new_node)
     return NULL;
   FILE *fpsr = fopen("sorted.txt", "r");
-  if (!fpsw) {
+  if (!fpsr) {
     puts ("** Fatal error: cannot open sorted.txt for read. Exiting.");
     exit (2);
   }
