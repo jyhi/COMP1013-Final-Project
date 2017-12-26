@@ -52,7 +52,7 @@ static int main_menu (void) {
   int choice = 0;              // Choice of user
   int r = 0;                   // Return values (for checking)
 
-  printf (main_menu_text);
+  printf ("%s", main_menu_text);
   if (!fgets (linebuf, BUFSIZE, stdin)) {
     puts ("Receive nothing, expect an option listed above. Exiting.");
     return MAIN_MENU_QUIT;
