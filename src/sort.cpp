@@ -25,12 +25,15 @@ static void get_total(Node *head, bool status[]){
 
 //Sort total mark using insert sort
 static Node *insert_sort(Node *head){
+  if (!head)
+    return NULL;
+
   Node *current;//Record the smallest number currently
   Node *present;//Record the node that node insert will insert after
   Node *insert;//Record the node which will be insertede
   current = head;//Store the origin head of linked list
   while (current->next != NULL){
-    if (current->total >= current->next->total){//If current->total is not the smallest 
+    if (current->total >= current->next->total){//If current->total is not the smallest
       current = current->next;
       continue;
     }
@@ -57,6 +60,10 @@ static Node *insert_sort(Node *head){
 //Print result into file
 static void file_print_result(Node *result){
   FILE *fpsw = fopen("sorted.txt", "w+");//Open sorted.txt to write results in
+  if (!fpsw) {
+    puts ("** Fatal error: cannot open sorted.txt for write. Exiting.");
+    exit (2);
+  }
   Node *pnode = result;//Record current node
   fprintf(fpsw, "%-10s%-6s%s\n", "Name", "ID", "Total");//Write the first line
   while (pnode != NULL){//Write data into sorted.txt
@@ -68,7 +75,13 @@ static void file_print_result(Node *result){
 
 //Read from file and return the head of linked list
 static Node *read_from_sorted(Node *new_node){
+  if (!new_node)
+    return NULL;
   FILE *fpsr = fopen("sorted.txt", "r");
+  if (!fpsw) {
+    puts ("** Fatal error: cannot open sorted.txt for read. Exiting.");
+    exit (2);
+  }
   Node *pnode, *next;//pnode record current node, next get data from file
   char linebuf[BUFSIZE];
   if (fgets(linebuf, BUFSIZE, fpsr) == NULL)//Ignore the first line
@@ -78,6 +91,10 @@ static Node *read_from_sorted(Node *new_node){
   pnode = new_node;
   while(true){//Scan data into a linked list
     next = (Node *)malloc(sizeof(Node));
+    if (!next) {
+      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      abort ();
+    }
     if (fscanf(fpsr, "%s %d %lf", next->name, &next->id, &next->total) == EOF){
       free(next);
       pnode->next = NULL;
@@ -92,12 +109,20 @@ static Node *read_from_sorted(Node *new_node){
 extern void sort (void) {
   bool hw_status[5] = {false};
   FILE *fpm = fopen("marks.txt", "r");
+  if (!fpm) {
+    puts ("** Fatal error: cannot open marks.txt for read. Exiting.");
+    return;
+  }
   Node *head, *pnode;
   read_from_marks(fpm, &head, hw_status);
   //Get total mark of each student
   get_total(head, hw_status);
   //Sort using insert sort
   head = insert_sort(head);
+  if (!head) {
+    puts ("** Fatal error: insert_sort failed. Abort.");
+    abort ();
+  }
   //Print into file
   file_print_result(head);
   //Read from file
