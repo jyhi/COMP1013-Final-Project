@@ -4,12 +4,13 @@
 
 /**
  * @file inquire.cpp
- * @version 1.5
+ * @version 2.0
  * @author Laurence
  *
  * This file contains functions related to the Inquire option.
  */
 
+//display the student's information who is inquired
 void inquire_student_display (Node *the_node, int assignment_number) {
     puts("The information of the student you inquire is:");
     printf("%s\t%d", the_node->name, the_node->id);
@@ -24,13 +25,17 @@ void inquire_by_index () {
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
-    read_from_marks(fpsm, &head, hw_status);
 
-    for (int i = 0; i < 5; i++){
+    if (read_from_marks(fpsm, &head, hw_status) == -1) {
+        return;
+    }
+
+    for (int i = 0; i < 5; i++) {
         if (hw_status[i]){
             assignment_number++;
         }
     }
+
     printf("Index\tName\tID\t");
     for (int j = 0; j < assignment_number; j++) {
         printf("Assignment%d", j + 1 );
@@ -69,7 +74,10 @@ void inquire_by_student_id () {
 
     Node *head, *pnode;
     FILE *fpsm = NULL;
-    read_from_marks(fpsm, &head, hw_status);
+
+    if (read_from_marks(fpsm, &head, hw_status) == -1) {
+        return;
+    }
 
     for (int i = 0; i < 5; i++){
         if (hw_status[i]){
@@ -94,7 +102,7 @@ void inquire_by_student_id () {
 extern void inquire (void) {
     //Unimplemented
     int inquire_menu_option;
-    puts("===== Student Grading System =====\n");
+    puts("\n===== Student Grading System =====\n");
     puts("Choose an option to start:");
     puts("Menu:");
     puts("1. By index");
@@ -103,8 +111,8 @@ extern void inquire (void) {
     printf("Your Option: ");
     //display the menu
 
-    fflush(stdin);
     scanf("%d", &inquire_menu_option);
+    puts("");
 
     switch (inquire_menu_option) {
         case 1:
