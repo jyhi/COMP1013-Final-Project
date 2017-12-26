@@ -6,9 +6,9 @@
  * This file contains functions related to the Inquire option.
  */
 
-#include "node.hpp"
 #include <stdlib.h>
 #include <string.h>
+#include "node.hpp"
 
 void inquire_student_display (Node *the_node, int assignment_number) {
     puts("The information of the student you inquire is:");
