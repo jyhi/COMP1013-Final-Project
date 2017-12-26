@@ -1,16 +1,15 @@
-#include "node.hpp"
-#include <stdlib.h>
-#include <string.h>
-
 /**
  * @file inquire.cpp
- * @version 2.0
- * @author Laurence
+ * @version 0.1
+ * @author Laurence <RainySummerLuo@users.noreply.github.com>
  *
  * This file contains functions related to the Inquire option.
  */
 
-//display the student's information who is inquired
+#include "node.hpp"
+#include <stdlib.h>
+#include <string.h>
+
 void inquire_student_display (Node *the_node, int assignment_number) {
     puts("The information of the student you inquire is:");
     printf("%s\t%d", the_node->name, the_node->id);
