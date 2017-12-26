@@ -27,9 +27,9 @@ void inquire_by_index (void) {
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
     FILE *fpsm = NULL;
-
     if (read_from_marks(fpsm, &head, hw_status) == -1) {
-        return;
+      puts ("** Errror encounted while reading marks, exiting.");
+      return;
     }
 
     for (int i = 0; i < 5; i++) {
@@ -56,7 +56,10 @@ void inquire_by_index (void) {
 
     puts("Please input the student's index number:");
     fflush(stdin);
-    scanf("%d", &student_index);
+    if (scanf("%d", &student_index) != 1) {
+      puts ("** Error encounted while reading values, exiting.");
+      return;
+    }
 
     for (int l = 0; l <= index; l++) {
         result = head;
@@ -74,13 +77,16 @@ void inquire_by_student_id () {
 
     puts("Please input the student's id number:");
     fflush(stdin);
-    scanf("%d", &student_id);
+    if (scanf("%d", &student_id) != 1) {
+      puts ("** Error encounted while reading values, exiting.");
+      return;
+    }
 
     Node *head, *pnode;
     FILE *fpsm = NULL;
-
     if (read_from_marks(fpsm, &head, hw_status) == -1) {
-        return;
+      puts ("** Errror encounted while reading marks, exiting.");
+      return;
     }
 
     for (int i = 0; i < 5; i++){
@@ -113,7 +119,10 @@ extern void inquire (void) {
     puts("3. Quit\n");
     printf("Your Option: ");
 
-    scanf("%d", &inquire_menu_option);
+    if (scanf("%d", &inquire_menu_option) != 1) {
+      puts ("** Invalid input encounted, exiting.");
+      return;
+    }
     puts("");
 
     switch (inquire_menu_option) {
