@@ -26,6 +26,10 @@ extern int read_from_students(FILE *fp, Node **head){
         return -1;
     }
     present = (Node *)malloc(sizeof(Node));
+    if (!present) {
+      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      abort ();
+    }
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
         puts("No data in students.txt");
         return -1;
@@ -33,6 +37,10 @@ extern int read_from_students(FILE *fp, Node **head){
     *head = present;
     while (true){
         next = (Node *)malloc(sizeof(Node));
+        if (!next) {
+          puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+          abort ();
+        }
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)
             break;
         present->next = next;
@@ -63,6 +71,10 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
             break;
     }
     present = (Node *)malloc(sizeof(Node));
+    if (!present) {
+      puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+      abort ();
+    }
     if (fscanf(fp, "%s %d", present->name, &present->id) == EOF){
         puts("No data in students.txt");
         return -1;
@@ -80,6 +92,10 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
     //Scan other nodes of linked
     while (true){
         next = (Node *)malloc(sizeof(Node));
+        if (!next) {
+          puts ("** Fatal error: memory allocation failed at %s:%s. Abort.", __FILE__, __LINE__);
+          abort ();
+        }
         if (fscanf(fp, "%s %d", next->name, &next->id) == EOF)
             break;
         for (int i = 0; i < 5; i++){
