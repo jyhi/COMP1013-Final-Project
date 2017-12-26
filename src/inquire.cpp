@@ -4,7 +4,7 @@
 
 /**
  * @file inquire.cpp
- * @version 1.5
+ * @version 2.0
  * @author Laurence
  *
  * This file contains functions related to the Inquire option.
@@ -73,7 +73,7 @@ void inquire_by_student_id () {
 
     Node *head, *pnode;
     FILE *fpsm = NULL;
-    
+
     if (read_from_marks(fpsm, &head, hw_status) == -1) {
         return;
     }
@@ -101,7 +101,7 @@ void inquire_by_student_id () {
 extern void inquire (void) {
     //Unimplemented
     int inquire_menu_option;
-    puts("===== Student Grading System =====\n");
+    puts("\n===== Student Grading System =====\n");
     puts("Choose an option to start:");
     puts("Menu:");
     puts("1. By index");
@@ -112,6 +112,7 @@ extern void inquire (void) {
 
     fflush(stdin);
     scanf("%d", &inquire_menu_option);
+    puts("");
 
     switch (inquire_menu_option) {
         case 1:
