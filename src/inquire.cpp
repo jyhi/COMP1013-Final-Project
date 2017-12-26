@@ -10,6 +10,7 @@
  * This file contains functions related to the Inquire option.
  */
 
+//display the student's information who is inquired
 void inquire_student_display (Node *the_node, int assignment_number) {
     puts("The information of the student you inquire is:");
     printf("%s\t%d", the_node->name, the_node->id);
@@ -29,7 +30,7 @@ void inquire_by_index () {
         return;
     }
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
         if (hw_status[i]){
             assignment_number++;
         }
@@ -110,7 +111,6 @@ extern void inquire (void) {
     printf("Your Option: ");
     //display the menu
 
-    fflush(stdin);
     scanf("%d", &inquire_menu_option);
     puts("");
 
