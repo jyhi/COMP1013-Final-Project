@@ -26,11 +26,11 @@ static int grade_in_num(char c){//Get the number of grade by letter grade
 }
 
 //Check the input of score
-static char get_question_grade(Node *pnode, int index, int j){
+static char get_question_grade(int j){
 	char c;
 	char linebuf[BUFSIZE];
 	while (true){
-		printf("Now grading %s's Assignment%d, question%d.Please input mark: ",pnode->name,index,j + 1);
+		printf("Question#%d. Please input mark: ", j + 1);
 		fgets(linebuf, BUFSIZE, stdin);
 		if (sscanf(linebuf, "%c",&c) != 1) {
 			puts ("** Invalid input encounted! Please try again.");
@@ -47,19 +47,21 @@ static char get_question_grade(Node *pnode, int index, int j){
 //Process of grading for assignments
 static void grading(Node **head,int index,int question){
 	char c;//Character for storing grades of questions
-	printf("Grade for Assignment%d start\n",index);
+	printf("\n===== Grade for Assignment%d start =====\n\n",index);
 	Node *pnode;
 	pnode = *head;
 	while (pnode != NULL){
 		double sum = 0;
+		printf("===== Assignment%d %s =====\n\n", index, pnode->name);		
 		for (int j= 0;j < question;j++){
-			c = get_question_grade(pnode, index, j);
+			c = get_question_grade(j);
 			sum += grade_in_num(c);
 		}
 		pnode->assignments[index-1] = sum / question;
-		printf("Grade of %s,Assignment%d done.\n", pnode->name ,index);
+		printf("\n===== Assignment%d %s Done =====\n\n", index, pnode->name);
 		pnode = pnode->next;
 	}
+	printf("===== Grade for Assignment%d Done =====\n\n", index);
 	puts("Process of gradingProcess of grading finished.");
 }
 
@@ -151,9 +153,11 @@ extern void grade(void){
     int index;//Question index of this assignment
     int questions;//Number of questions in this assignment
     //Confirm number of questions and index of this assignment
+	printf("===== Student Grading System =====\n\n");
     index = get_hw_index();
     hw_status[index-1] = true;
     questions = get_question_number();
+	getchar();//Clear last '\n' from last input	
     grading(&head, index, questions);
     write_data(head, hw_status);
 }
