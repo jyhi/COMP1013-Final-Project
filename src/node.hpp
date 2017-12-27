@@ -13,7 +13,7 @@
 typedef struct node {
     char name[20];
     int id;
-    double assignments[5 ];
+    double assignments[5];
     double total;
     struct node *next;
 } Node;
