@@ -1,7 +1,6 @@
 /**
  * @file grade.hpp
- * @version 1.1
- * @Millions of thanks to JACK
+ * @version 0.1
  *
  * This file contains prototypes of functions related to the Grade option.
  */

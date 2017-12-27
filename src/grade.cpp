@@ -1,7 +1,6 @@
 /**
  * @file grade.cpp
- * @version 1.1
- * @Millions of thanks to JACK
+ * @version 0.1
  *
  * This file contains functions related to the Grade option.
  */
@@ -26,23 +25,44 @@ static int grade_in_num(char c){//Get the number of grade by letter grade
 	}
 }
 
+//Check the input of score
+static char get_question_grade(int j){
+	char c;
+	char linebuf[BUFSIZE];
+	while (true){
+		printf("Question#%d. Please input mark: ", j + 1);
+		if (fgets(linebuf, BUFSIZE, stdin) == NULL)
+			continue;
+		if (sscanf(linebuf, "%c",&c) != 1) {
+			puts ("** Invalid input encounted! Please try again.");
+			continue;
+		}
+		if ((c >= 'A' && c <= 'D') || c == 'F')
+			break;
+		else
+			puts("Please input A, B, C, D or F");
+	}
+	return c;
+}
+
 //Process of grading for assignments
 static void grading(Node **head,int index,int question){
 	char c;//Character for storing grades of questions
-	printf("Grade for Assignment%d start\n",index);
+	printf("\n===== Grade for Assignment%d start =====\n\n",index);
 	Node *pnode;
 	pnode = *head;
 	while (pnode != NULL){
 		double sum = 0;
+		printf("===== Assignment%d %s =====\n\n", index, pnode->name);		
 		for (int j= 0;j < question;j++){
-			printf("Now grading %s's Assignment%d, question%d.Please input mark: ",pnode->name,index,j + 1);
-			scanf("%*c%c",&c);
+			c = get_question_grade(j);
 			sum += grade_in_num(c);
 		}
 		pnode->assignments[index-1] = sum / question;
-		printf("Grade of %s,Assignment%d done.\n", pnode->name ,index);
+		printf("\n===== Assignment%d %s Done =====\n\n", index, pnode->name);
 		pnode = pnode->next;
 	}
+	printf("===== Grade for Assignment%d Done =====\n\n", index);
 	puts("Process of gradingProcess of grading finished.");
 }
 
@@ -59,7 +79,7 @@ static void write_table_header(bool hw_status[],FILE *fp){
 //Write content of table for sorting
 static void write_table_content(Node *head, FILE *fp, bool hw_status[]){
 	Node *pnode;
-	pnode = head;	
+	pnode = head;
 	while (pnode != NULL){
 	  fprintf(fp, "%-10s%-6d", pnode->name, pnode->id);
       for (int j = 0; j < 5; j++){
@@ -80,6 +100,44 @@ static void write_data(Node *head, bool hw_status[]){
     fclose(fp3);
 }
 
+//Get and check the input value of homework index
+static int get_hw_index(){
+	int index;
+	char c;
+	while (true){
+    	printf("Please input the index of this Assignment: ");
+		if (scanf("%d", &index) != 1){
+			puts("** Invalid input encounted! Please try again");
+			while ((c = getchar()) != EOF && c!='\n');//Clear buffer
+			continue;
+		}
+		if (index >= 1 && index <= 5)
+			break;
+		else
+			puts("Please input integer between 1-5.");
+	}
+	return index;
+}
+
+//Get number of questions and check it
+static int get_question_number(){
+	int questions;
+	char c;
+	while (true){
+    	printf("Please input the question number of this Assignment: ");
+		if (scanf("%d", &questions) != 1){
+			puts("** Invalid input encounted! Please try again");
+			while ((c = getchar()) != EOF && c!='\n');//Clear buffer
+			continue;
+		}
+		if (questions >= 1 && questions <= 10)
+			break;
+		else
+			puts("Please input integer between 1-10.");
+	}
+	return questions;
+}
+
 extern void grade(void){
     //Input necessary information
     Node *head;
@@ -96,11 +154,11 @@ extern void grade(void){
     int index;//Question index of this assignment
     int questions;//Number of questions in this assignment
     //Confirm number of questions and index of this assignment
-    printf("Please input the index of this Assignment: ");
-    scanf("%d", &index);
+	printf("===== Student Grading System =====\n\n");
+    index = get_hw_index();
     hw_status[index-1] = true;
-    printf("Please input the question number of this Assignment: ");
-    scanf("%d", &questions);
+    questions = get_question_number();
+	getchar();//Clear last '\n' from last input	
     grading(&head, index, questions);
     write_data(head, hw_status);
 }
