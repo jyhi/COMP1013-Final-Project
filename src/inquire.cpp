@@ -10,11 +10,17 @@
 #include "node.hpp"
 
 void inquire_student_display (Node *the_node, int assignment_number) {
-    puts("The information of the student you inquire is:");
-    printf("%s\t%d", the_node->name, the_node->id);
-    for (int k = 0; k < assignment_number; k++) {
-        printf("%.2lf\t", the_node->assignments[k]);
+    puts("The information of the student you inquire is:");    
+    printf("%-10s%-6s", "Name", "ID");
+    for (int i = 0; i < assignment_number; i++){
+        printf("\tAssignment%d", i + 1);
     }
+    printf("\n");
+    printf("%-10s%-6d\t", the_node->name, the_node->id);    
+    for (int k = 0; k < assignment_number; k++) {
+        printf("%-10.2f\t", the_node->assignments[k]);
+    }
+    puts("");
 }
 
 /**
@@ -25,7 +31,7 @@ void inquire_by_index (void) {
     int student_index, index = 0, assignment_number = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
-    FILE *fpsm = NULL;
+    FILE *fpsm = fopen("marks.txt", "r");
     if (read_from_marks(fpsm, &head, hw_status) == -1) {
       puts ("** Errror encounted while reading marks, exiting.");
       return;
@@ -37,32 +43,32 @@ void inquire_by_index (void) {
         }
     }
 
-    printf("Index\tName\tID\t");
+    printf("Index\t%-10s%-6s", "Name", "ID");
     for (int j = 0; j < assignment_number; j++) {
-        printf("Assignment%d", j + 1 );
+        printf("\tAssignment%d", j + 1 );
     }
-
+    printf("\n");
     pnode = head;
 
     while (pnode != NULL) {
-        printf("%d\t%s\t%d", index, pnode->name, pnode->id);
+        printf("%d\t%-10s%-6d", index + 1, pnode->name, pnode->id);
         for (int k = 0; k < assignment_number; k++) {
-            printf("%.2lf\t", pnode->assignments[k]);
+            printf("\t%-10.2f", pnode->assignments[k]);
         }
+        printf("\n");
         index++;
         pnode = pnode->next;
     }
 
     puts("Please input the student's index number:");
-    fflush(stdin);
     if (scanf("%d", &student_index) != 1) {
       puts ("** Error encounted while reading values, exiting.");
       return;
     }
-
-    for (int l = 0; l <= index; l++) {
-        result = head;
-        head = head -> next;
+    result = head;    
+    printf("%d %s\n", index, result->name);
+    for (int l = 1; l < student_index; l++) {
+        result = result -> next;
     }
     inquire_student_display (result, assignment_number);
 }
@@ -75,14 +81,13 @@ void inquire_by_student_id () {
     bool hw_status[5] = {false};
 
     puts("Please input the student's id number:");
-    fflush(stdin);
     if (scanf("%d", &student_id) != 1) {
       puts ("** Error encounted while reading values, exiting.");
       return;
     }
 
     Node *head, *pnode;
-    FILE *fpsm = NULL;
+    FILE *fpsm = fopen("marks.txt", "r");
     if (read_from_marks(fpsm, &head, hw_status) == -1) {
       puts ("** Errror encounted while reading marks, exiting.");
       return;
