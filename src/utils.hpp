@@ -1,7 +1,6 @@
 /**
  * @file utils.hpp
  * @version 0.1
- * @author
  *
  * This file contains userful utilities.
  */

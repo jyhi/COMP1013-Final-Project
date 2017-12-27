@@ -9,12 +9,29 @@ See the project guideline for details.
 On Linux or Windows with Cygwin / MSYS / WSL:
 
 ```bash
-make clean     # Clean the repository
-make           # Do a release build with optimizations
+make clean     # Clean the repository (Available in both root and src directory)
+make           # Do a release build with optimizations (Only available in root directory of project)
 # make DEBUG=1 # Do a debug build with debugging symbols and no optimizations
 ```
 
 On Windows with Visual Studio, see [Setup project in Visual Studio](#setup-project-in-visual-studio) below.
+
+## Running
+
+If your txt files are in the root directory, then:
+
+```shell
+src/grading
+```
+
+If your txt files are in the src directory, then:
+
+```shell
+cd src
+./grading
+```
+
+
 
 ## Naming <!-- Disclaimer -->
 
@@ -41,9 +58,9 @@ In which:
 3. Right click your mouse in File Explorer and choose **"Git Bash"**, then type in
 
 ```shell
-$ git init
-$ git remote add origin https://github.com/lmy441900/COMP1013-Final-Project
-$ git pull origin master
+git init
+git remote add origin https://github.com/lmy441900/COMP1013-Final-Project
+git pull origin master
 ```
 
 4. Then go back to Visual Studio and right click **Head Files** in Solution Explorer and then **Add -> Existing Items** and add all the **.hpp** files in **src** folder. Then right click Source Files in Solution Explorer and then  **Add -> Existing Items** and add all the **.cpp** files in **src** folder.
