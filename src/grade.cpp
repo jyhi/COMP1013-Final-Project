@@ -1,7 +1,6 @@
 /**
  * @file grade.cpp
  * @version 1.1
- * @Millions of thanks to JACK
  *
  * This file contains functions related to the Grade option.
  */

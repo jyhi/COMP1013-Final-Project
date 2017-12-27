@@ -1,7 +1,6 @@
 /**
  * @file inquire.cpp
  * @version 0.1
- * @author Laurence <RainySummerLuo@users.noreply.github.com>
  *
  * This file contains functions related to the Inquire option.
  */

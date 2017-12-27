@@ -1,7 +1,6 @@
 /**
  * @file node.hpp
  * @version 0.1
- * @author
  *
  * This file contains prototypes of linked list.
  */

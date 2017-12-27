@@ -1,7 +1,6 @@
 /**
  * @file node.cpp
  * @version 0.1
- * @author Renjie Deng <dengrenjie31@gmail.com>
  *
  * This file contains functions on operations about linked list.
  */
