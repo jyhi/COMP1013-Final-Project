@@ -18,7 +18,7 @@ extern int read_from_students(FILE *fp, Node **head){
     char linebuf[BUFSIZE];
     Node *present, *next;
     if(fp == NULL){
-        puts("File not exist.");
+        puts("students.txt: File not exist.");
         return -1;
     }
     if (fgets(linebuf, BUFSIZE, fp) == NULL){
@@ -48,7 +48,7 @@ extern int read_from_marks(FILE *fp, Node **head, bool status[]){
     char linebuf[BUFSIZE];
     Node *present, *next;
     if(fp == NULL){
-        puts("File not exist.");
+        puts("marks.txt: File not exist.");
         return -1;
     }
     if (fscanf(fp, "%*s%s", linebuf) == EOF){
