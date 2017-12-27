@@ -36,7 +36,10 @@ static void grading(Node **head,int index,int question){
 		double sum = 0;
 		for (int j= 0;j < question;j++){
 			printf("Now grading %s's Assignment%d, question%d.Please input mark: ",pnode->name,index,j + 1);
-			scanf("%*c%c",&c);
+			if (scanf("%*c%c",&c) != 1) {
+				puts ("** Invalid input encounted! Exiting.");
+				exit (1);
+			}
 			sum += grade_in_num(c);
 		}
 		pnode->assignments[index-1] = sum / question;
@@ -59,7 +62,7 @@ static void write_table_header(bool hw_status[],FILE *fp){
 //Write content of table for sorting
 static void write_table_content(Node *head, FILE *fp, bool hw_status[]){
 	Node *pnode;
-	pnode = head;	
+	pnode = head;
 	while (pnode != NULL){
 	  fprintf(fp, "%-10s%-6d", pnode->name, pnode->id);
       for (int j = 0; j < 5; j++){
@@ -97,10 +100,16 @@ extern void grade(void){
     int questions;//Number of questions in this assignment
     //Confirm number of questions and index of this assignment
     printf("Please input the index of this Assignment: ");
-    scanf("%d", &index);
+    if (scanf("%d", &index) != 1) {
+			puts ("** Invalid index encounted! Exiting.");
+			exit (1);
+		}
     hw_status[index-1] = true;
     printf("Please input the question number of this Assignment: ");
-    scanf("%d", &questions);
+    if (scanf("%d", &questions) != 1) {
+			puts ("** Invalid question number encounted! Exiting.");
+			exit (1);
+		}
     grading(&head, index, questions);
     write_data(head, hw_status);
 }
