@@ -129,9 +129,11 @@ extern void sort (void) {
   new_node = read_from_sorted(new_node);
   //Print the result out
   pnode = new_node;
-  printf("%-10s%-6s%s\n", "Name", "ID", "Total");
-  while (pnode != NULL){
-    printf("%-10s%-6d%.2f\n", pnode->name, pnode->id, pnode->total);
+  printf("=====================\n");
+  printf("%-10s%-6s%-6s\n", "Name", "ID", "Total");
+  while (pnode != NULL){    
+    printf("%-10s%-6d%-6.2f\n", pnode->name, pnode->id, pnode->total);
     pnode = pnode->next;
   }
+  printf("=====================\n");
 }

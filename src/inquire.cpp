@@ -9,8 +9,18 @@
 #include <string.h>
 #include "node.hpp"
 
-void inquire_student_display (Node *the_node, int assignment_number) {
-    puts("The information of the student you inquire is:");    
+//Print lines in table
+static void print_hline(int initial, int hw_num){
+    int length = initial + hw_num * 15;
+    for (int i = 0; i < length; i++){
+        printf("=");
+    }
+    puts("");
+}
+
+static void inquire_student_display (Node *the_node, int assignment_number) {
+    puts("The information of the student you inquire is:\n");  
+    print_hline(22, assignment_number);  
     printf("%-10s%-6s", "Name", "ID");
     for (int i = 0; i < assignment_number; i++){
         printf("\tAssignment%d", i + 1);
@@ -21,13 +31,14 @@ void inquire_student_display (Node *the_node, int assignment_number) {
         printf("%-10.2f\t", the_node->assignments[k]);
     }
     puts("");
+    print_hline(22, assignment_number);    
 }
 
 /**
  * Inquire the student's information by input the index of that student in the
  * list.
  */
-void inquire_by_index (void) {
+static void inquire_by_index (void) {
     int student_index, index = 0, assignment_number = 0;
     bool hw_status[5] = {false};
     Node *head, *pnode, *result;
@@ -42,7 +53,7 @@ void inquire_by_index (void) {
             assignment_number++;
         }
     }
-
+    print_hline(30, assignment_number);  
     printf("Index\t%-10s%-6s", "Name", "ID");
     for (int j = 0; j < assignment_number; j++) {
         printf("\tAssignment%d", j + 1 );
@@ -59,14 +70,14 @@ void inquire_by_index (void) {
         index++;
         pnode = pnode->next;
     }
-
-    puts("Please input the student's index number:");
+    print_hline(30, assignment_number);  
+    printf("\n");
+    printf("Please input the student's index number: ");
     if (scanf("%d", &student_index) != 1) {
       puts ("** Error encounted while reading values, exiting.");
       return;
     }
     result = head;    
-    printf("%d %s\n", index, result->name);
     for (int l = 1; l < student_index; l++) {
         result = result -> next;
     }
@@ -76,7 +87,7 @@ void inquire_by_index (void) {
 /**
  * Inquire the student's information by input the id number.
  */
-void inquire_by_student_id () {
+static void inquire_by_student_id () {
     int student_id, assignment_number = 0;
     bool hw_status[5] = {false};
 

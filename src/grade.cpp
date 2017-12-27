@@ -31,7 +31,8 @@ static char get_question_grade(int j){
 	char linebuf[BUFSIZE];
 	while (true){
 		printf("Question#%d. Please input mark: ", j + 1);
-		fgets(linebuf, BUFSIZE, stdin);
+		if (fgets(linebuf, BUFSIZE, stdin) == NULL)
+			continue;
 		if (sscanf(linebuf, "%c",&c) != 1) {
 			puts ("** Invalid input encounted! Please try again.");
 			continue;
