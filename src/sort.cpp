@@ -4,9 +4,9 @@
  *
  * This file contains functions related to the Sort option.
  */
-#include "node.hpp"
 #include <stdlib.h>
 #include <string.h>
+#include "node.hpp"
 //Get total mark of each student
 static void get_total(Node *head, bool status[]){
   Node *pnode = head;
