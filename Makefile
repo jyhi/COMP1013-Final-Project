@@ -1,24 +1,4 @@
-CC = gcc
-LD = gcc
-
-CP = cp
-RM = rm
-RMFLAGS = -f
-
-EXENAME = grading
-# SUFFIX = .exe
-
-ifdef DEBUG
-CFLAGS   = -O0 -fstack-protector-all --param=ssp-buffer-size=4 -ggdb -Wall -Wextra -pedantic
-CPPFLAGS =
-LDFLAGS  =
-else
-CFLAGS   = -O2 -fstack-protector-strong --param=ssp-buffer-size=4 -fPIE -Wall -Wextra -pedantic
-CPPFLAGS = -D_FORTIFY_SOURCE=2
-LDFLAGS  = -pie
-endif
-
-export
+# A stub Makefile making your life easier.
 
 .PHONY: all clean
 
