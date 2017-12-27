@@ -48,16 +48,16 @@ static void grading(Node **head,int index,int question){
 
 //Write header of table for sorting
 static void write_table_header(bool hw_status[],FILE *fp){
-	fprintf(fp, "%-10d%-6s","Name","ID");
+	fprintf(fp, "%-10s%-6s","Name","ID");
 	for (int i = 0;i < 5;i++ ){
 		if(hw_status[i])
-			fprintf(fp, "\Assignment%d",i + 1);
+			fprintf(fp, "\tAssignment%d",i + 1);
 	}
 	fprintf(fp,"\n");
 }
 
 //Write content of table for sorting
-static void write_table_content(Node *head, FILE *fp, bool HW_statusp[]){
+static void write_table_content(Node *head, FILE *fp, bool hw_status[]){
 	Node *pnode;
 	pnode = head;	
 	while (pnode != NULL){
